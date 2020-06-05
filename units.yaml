@@ -1,0 +1,12 @@
+ft_2_m: &ft_2_m 0.3048
+ft2_2_m2: &ft2_2_m2 0.09290304
+lbs_2_kg: 0.453592
+mph_to_mps: &mph_to_mps 0.44704
+mps_to_mph: &mps_to_mph 2.23694
+slugpft3_2_kgpm3: &slugpft3_2_kgpm3 515.378819
+slugpfts_2_pas3: &slugpfts_2_pas3 47.88
+ftps_2_mps: *ft_2_m
+n_2_lbf: &n_2_lbf 0.224809
+lbf_2_n: &lbf_2_n 4.44822
+mps_2_fps: &mps_2_fps 3.28084
+no_unit: &no_unit 1
