@@ -33,3 +33,11 @@ def get_cl_lin(a0: float, alpha: float, alpha_zero_lift: float) -> float:
     cl = a0 * (alpha - alpha_zero_lift) * 0.0174533
 
     return cl
+
+
+def get_magnus_force(
+        r_ref: float, rho_inf: float, omega_ref: float, v_inf: float) -> float:
+
+    magnus_force = np.pi ** 2 * r_ref ** 3 * rho_inf * omega_ref * v_inf
+
+    return magnus_force

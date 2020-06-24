@@ -12,9 +12,16 @@ def get_drag_coef_using_lift_coef(
 
 
 def get_drag(
-        sref: float, cd: float, qinf: float = None, rho: float = None,
-        vinf: float = None, **kwargs) -> float:
+        s_ref: float, cd: float, qinf: float = None, rho: float = None,
+        v_inf: float = None, **kwargs) -> float:
 
-    qinf = qinf if qinf else get_q(rho_inf=rho, v_inf=vinf)
-    drag = qinf * sref * cd
+    qinf = qinf if qinf else get_q(rho_inf=rho, v_inf=v_inf)
+    drag = qinf * s_ref * cd
     return drag
+
+
+def get_sphere_stokes_drag_coeff(re_inf: float = None) -> float:
+
+    stokes_drag_coeff = 24 / re_inf
+
+    return stokes_drag_coeff

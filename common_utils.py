@@ -11,8 +11,8 @@ def get_ma(v_inf: float, a_inf: float) -> float:
     return mainf
 
 
-def get_ainf(t_inf: float, kappa: float = 1.4, rconst: float = 287.95) -> float:
-    ainf = np.sqrt(kappa, rconst, t_inf)
+def get_a_inf(t_inf: float, kappa: float = 1.4, gas_const: float = 287.95) -> float:
+    ainf = np.sqrt(kappa * gas_const * t_inf)
     return ainf
 
 
@@ -22,26 +22,58 @@ def get_vinf_frm_ainf_a_mainf(a_inf: float, ma_inf: float) -> float:
     return vinf
 
 
-def ma_frm_air_props(
+def get_ma_frm_air_props(
         v_inf: float, t_inf: float, kappa: float = 1.4,
-        rconst: float = 287.95) -> float:
+        gas_const: float = 287.95) -> float:
 
-    ainf = v_inf / get_ainf(t_inf=t_inf, kappa=kappa, rconst=rconst)
+    ainf = v_inf / get_a_inf(t_inf=t_inf, kappa=kappa, gas_const=gas_const)
     return ainf
 
 
-def get_kin_visc_frm_dyn_visc(dyn_visc: float, rho_inf: float) -> float:
-    return dyn_visc / rho_inf
+def get_kin_visc_frm_dyn_visc(visc_dyn: float, rho_inf: float) -> float:
+    return visc_dyn / rho_inf
 
 
-def get_reynolds(
-        v_inf: float, l_ref: float, dyn_visc: float = None, rho_inf: float = None,
-        kin_visc: float = None) -> float:
+def get_re_inf(
+        v_inf: float, l_ref: float, visc_dyn: float = None, rho_inf: float = None,
+        visc_kin: float = None) -> float:
 
-    if not kin_visc:
-        kin_visc = \
-            get_kin_visc_frm_dyn_visc(dyn_visc=dyn_visc,rho_inf=rho_inf)
+    if not visc_kin:
+        visc_kin = \
+            get_kin_visc_frm_dyn_visc(visc_dyn=visc_dyn, rho_inf=rho_inf)
 
-    reynolds_num = v_inf * l_ref / kin_visc
+    reynolds_num = v_inf * l_ref / visc_kin
 
     return reynolds_num
+
+
+def get_v_inf_from_re_inf(
+        re_inf: float, l_ref: float, visc_dyn: float = None,
+        rho_inf: float = None, visc_kin: float = None):
+
+    if not visc_kin:
+        visc_kin = \
+            get_kin_visc_frm_dyn_visc(visc_dyn=visc_dyn, rho_inf=rho_inf)
+
+    v_inf = re_inf * visc_kin / l_ref
+    return v_inf
+
+
+def get_p_from_ideal_gas_eq(rho: float, gas_const: float, t: float) -> float:
+
+    p = rho * gas_const * t
+
+    return p
+
+
+def get_t_from_ideal_gas_eq(p: float, gas_const: float, rho: float) -> float:
+
+    t = p / gas_const / rho
+
+    return t
+
+
+def get_rho_from_ideal_gas_eq_with_a_inf(
+        kappa: float, p: float, a: float) -> float:
+    rho = kappa * p / a ** 2
+    return rho
