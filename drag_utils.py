@@ -4,7 +4,7 @@ from math import pi
 from common_utils import get_q
 
 
-def get_drag_coef_using_lift_coef(
+def get_cd_w_cl(
         cl: float, cd0: float, ar: float, e: float) -> float:
 
     cd = cd0 + cl ** 2 / pi / ar / e

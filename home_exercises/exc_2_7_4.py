@@ -41,10 +41,10 @@ if __name__ == '__main__':
 
         input_kwargs = conv_vals_series.to_dict()
 
-        res['cl_{}'.format(h_sfx)] = get_lift_coeff(**input_kwargs) * 9.81
+        res['cl_{}'.format(h_sfx)] = get_cl(**input_kwargs) * 9.81
 
         res['cd_{}'.format(h_sfx)] = \
-            get_drag_coef_using_lift_coef(
+            get_cd_w_cl(
                 cl=res['cl_{}'.format(h_sfx)], cd0=CD0, ar=input_kwargs['ar'],
                 e=e)
 

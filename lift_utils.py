@@ -12,7 +12,7 @@ def get_lift(
     return lift
 
 
-def get_lift_coeff(
+def get_cl(
         w: float, sref: float, qinf: float = None, rho: float = None,
         vinf: float = None, **kwargs) -> float:
 
@@ -21,9 +21,14 @@ def get_lift_coeff(
     return lift_coeff
 
 
-def get_v_frm_lift(w: float, sref: float, rho: float, cl: float) -> float:
+def get_cl_min_pow_sq_polar(cd0: float, ar: float, e: float) -> float:
+    cl = np.sqrt(3 * cd0 * np.pi * ar * e)
+    return cl
 
-    vinf = np.sqrt(2 * 9.81 * w / rho / sref / cl)
+
+def get_v_frm_lift(w: float, s_ref: float, rho: float, cl: float) -> float:
+
+    vinf = np.sqrt(2 * 9.81 * w / rho / s_ref / cl)
 
     return vinf
 
